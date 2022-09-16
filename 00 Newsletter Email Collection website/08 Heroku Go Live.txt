@@ -1,0 +1,121 @@
+Where are our servers running? locally
+
+Right now we use our server
+
+How to send url to others?
+How to put it on www?
+How to make it go Live? Make it real web app on world wide web
+to send others a url for them to use website and sign up
+
+
+
+Can we use Github pages? not a static website
+	it supports only static content
+
+
+Buying and setting up own server? No lot of work, have to run 24/7
+			
+
+How to rent server?Heroku
+
+Can get more servers if more requests
+	Why more servers help? can respond to request from more browser
+
+Sign up
+_____________________________________________________________________________________________
+
+Dashboard -> Get started -> Deploy app -> Node jS
+
+1) Download Heroku CLI
+	after installing
+2) heroku login
+	Email
+	Password
+	//Authentication is done
+
+3) Do version checks
+	heroku --version
+	node--version	//works for >8 version
+	npm --version	//check if npm installed
+	git    --version
+
+
+4) Prepare App
+
+$ git clone https://github.com/heroku/node-js-getting-started.git
+$ cdnode-js-getting-started
+
+
+
+6) DYNAMIC HEROKU PORT for heroku deployment
+
+Updations in your app
+	where are we listening in our app? port 3000 //Local port
+	Upload our code -> Heroku Servers //they might not use port 3000
+
+	app.listen(process.env.PORT || 3000, function(){			//process object defined by heroku,How to run locally? add or 3000 (Heroku + local)
+	  console.log("server is running on port 3000")
+})	
+
+7) Create Procfile
+
+How were we launching our app? nodemon -> constant bckgrnd refresh, update changes
+	
+usual way:   node apps.js	//server file
+
+In cmd
+	touch Procfile.txt
+
+In Procfile.txt
+      processtype   launch command
+ 	   _____  ______________
+	    web: node app.js			//to make heroku launch our file
+
+
+
+8) Save work to GIT
+	//can drag and drop folder in cmd
+
+	1) cd to project folder	//should contain package.json, node modules
+
+	2) git init			//helps  save versions/time point of app/code
+
+	3) git add .		//adds all files in current repository to version control
+	
+	4) git commit -m "first Commit"		//Commit changes to current new version + add message
+				//All files get committed
+
+
+9) Deploy app
+	heroku create		//stay logged in
+		//Open this link
+	// o/p  https://salty-tor-51038.herokuapp.com  |  https://git.heroku.com/salty-tor-51038.git
+	// Empty since no code pushed yet
+
+    	If error use iin cmd	//for ex if port not added and heroku cant bind to port
+		Heroku logs
+
+10) Push local version
+	git push heroku master
+		//verifying//deploying//done
+
+	Load website	//after a while
+	https://salty-tor-51038.herokuapp.com 
+
+
+11) Test your app in running 
+	enter details
+	Refresh mailchimp	//person added from live and up running website
+
+
+12) Test by making changes
+	1) Make changes
+		index.html -> success.html ->change h1 	//Save
+	2) Add changes to version control
+		 git add .
+	3) Commit current version , specify why
+		git commit -m "Changed success page h1"
+
+	4) Push changes, update website with changes
+		git push heroku master	
+

@@ -1,0 +1,134 @@
+we dont send eany message after user send details
+	They dont get confidence if we dont give them feedback
+
+1) Find response code
+How to find response code we got back after making https request
+	if response code 200, things ok
+
+
+//Create some options
+	   const options= {
+				//we use method option. earlier used get option.why method? to post data to server
+	   method: "POST",
+	   auth: "angela1:fd8d2a94f77b14c7c....-us4"		//use any key from username, separate username from password //password  will be api key
+							//api key and url region should match	
+
+const request = https.request(url, options, function(response){		//pass url, pass option, have a callback to give us response from mailchimp server 
+	 			
+		if (response.statusCode === 200){
+			res.send("Succesfully subscribed!");
+ 		}
+		else {
+		res.send("There was error with signing up, please try again!");
+}
+		response	.on("data", function(data){
+			console.log(JSON.parse(data));	//datra sent back from mailchimp serveris parsed by JSON.parse
+
+	//Where to add data to send to server? in documentation for request method , save  request in const variable (for ex const req)
+				//use req to send things to server for ex   
+					//req.write
+	request.write(jsonData);		//pass this json datato mailchimp server
+	request.end();			//Done with request
+
+TEST:
+Enter details:
+ Cliick sign up -> 
+Succesfully subscribed!
+
+try changing const options api key in auth
+There was error with signing up, please try again!
+____________________________________________________________________________________________________
+How to jazz up response?
+success.html   failiure.html in addition to signup.html
+
+1) failiure.html
+Enter bootstrap code
+Include button, allow user to interact
+
+Bootstrap -> Components -> Jumbotron
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Failiure</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	   <div class="jumbotron jumbotron-fluid">
+	   <div class="container">
+ 	   <h1 class="display-4">Uh Oh!`</h1>
+ 	   <p class="lead">there is a problem signing you up.Please try again</p>
+
+	//How to give button to lead back to sign up page if error html code
+	
+	<form class="" action="/failiure" method="post">		//Button will have action of posting new route: failiure route
+		<button class="btn btn-lg btn-warning"type="button" name="button">Try Again</button>
+	</form>
+  </p> 
+</div>
+</div>
+
+  </body>
+</html>
+
+2) Success.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Failiure</title>
+//copy your bootstrap cdn stylesheet
+<link rel="stylesheet" href="".....>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	   <div class="jumbotron jumbotron-fluid">
+	      <div class="container">
+ 	         <h1 class="display-4">Awesome</h1>
+ 	         <p class="lead">You have successfully signed up</p>
+  
+</div>
+</div>
+
+  </body>
+</html>
+__________________________________________________________________________________
+How to send these success and failiure messages instead?
+instead of res.send use res.sendFile
+
+
+
+/Create some options
+	   const options= {
+				//we use method option. earlier used get option.why method? to post data to server
+	   method: "POST",
+	   auth: "angela1:fd8d2a94f77b14c7c....-us4"		//use any key from username, separate username from password //password  will be api key
+							//api key and url region should match	
+
+	  const request = https.request(url, options, function(response){		//pass url, pass option, have a callback to give us response from mailchimp server 
+	 			
+		if (response.statusCode === 200){
+			res.sendFile(__dirname + "/success.html");
+ 		}
+		else {
+			res.sendFile(__dirname + /failiure.html);
+}
+		response	.on("data", function(data){
+			console.log(JSON.parse(data));	//datra sent back from mailchimp serveris parsed by JSON.parse
+
+	//Where to add data to send to server? in documentation for request method , save  request in const variable (for ex const req)
+				//use req to send things to server for ex   
+					//req.write
+	request.write(jsonData);		//pass this json datato mailchimp server
+	request.end();			//Done with request
+
+
+TEST:
+
+angar
+bharat
+a@b.com
+
+-> Click sign me up ->
+Awesome is output

@@ -1,0 +1,34 @@
+what is newsletter? email people who want to hear
+
+1) sign up page to sign people for mailing list
+
+
+prerequisites
+  cd to your destination   //cd Desktop
+  create new folder newsletter-signup  //mkdir Newsletter-Signup
+				  cs Newsletter-Signup
+  //touch app js  success.html failiure.html
+  create app.js, signup.html, success.html, failiure.html
+ //npm init...
+  install modules
+   body parser	//npm install body-parser express request 
+   express
+   request npm
+  require them in app.js
+ create express app, set to listen on 3000 port
+ log server is running on port 300 
+
+
+//jshint esversion: 6
+const express = require("express");
+const https = require ("https");
+const bodyParser = require("body-parser");
+
+const app = express().   //new express instance
+
+app listen(3000, function() {
+//app will listen on port 300 and once setup log
+console.log("server is up and running on port 3000");
+});
+
+---------------------------------------------------------------------------

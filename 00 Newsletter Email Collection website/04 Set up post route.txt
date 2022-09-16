@@ -1,0 +1,65 @@
+First change
+
+
+<form action="/" class="form-signin" method="POST">		//post at home location
+<img class="mb-4" src="images/lablogo.png">
+
+E) <input type="text" name ="fname" class="form-control top" placeholder="First Name" required autofocus>	//First one automatically focus on loading website
+
+   <input type="text" name ="lname" class="form-control middle" placeholder="Last Name" required >
+
+   <input type="text" name="email"  class="form-control bottom" placeholder="Email" required >
+   
+   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Me Up </button>
+  <p class="mt-5 mb-3 text-muted">&copy; atwe inc</p>
+
+
+________________________________________________________________________________________________________________________________
+//What will we use to grab data from sign up form and console log user input from server?  Body parser
+
+const express = require("express");
+const body-parser = require("body-parser");	
+const request = require("request");
+
+const app = express();
+
+//add server static files method
+	app.use(express.static("public"));
+//Use body parser
+	app.use(bodyParser.urlencoded({extended: true  }))
+
+app.get("/", function(req, res){		//use home route//newsletter sign up on home page   // add callback function with req and res
+   res.sendFile(__dirname + "/signup.html")	//specify response to send file at directoryname location 
+});
+
+app.post("/", function(req,res){
+
+	//Pull up values from inside form into variable
+	
+	
+	var firstName = req.body.name
+	var lastName = req.body.lname
+ 	var email        = req.body.email;
+
+	console.log(firstName, lastName, email);
+})
+
+app.listen(3000, function(){
+   console.log("Server is up and running on port 3000");
+});
+______________________________________________________________________
+Test
+Enter Name: Angela
+          Last Name: Yu
+          Email : 1@2.com
+
+Why did not get console log? We didnt add POST in 
+<form action="/" class="form-signin" method="POST">		//post at home location
+
+information from form posted to home location using above
+our server picks up using app.post("/", function(req,res))
+
+//Try submitting again now
+
+>Angela Yu 1@2.com	
+	//Sign up form submits to home route using post request 

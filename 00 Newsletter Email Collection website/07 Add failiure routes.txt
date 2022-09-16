@@ -1,0 +1,117 @@
+1)
+//Below: This was post request for home route
+//add another post request for failiure route
+app.post("/", function(req,res){
+
+	//Pull up values from inside form into variable
+	
+	
+	const firstName = req.body.name
+	const lastName = req.body.lname
+ 	const email        = req.body.email;
+
+	//JS to be converted to flatback json
+	//Prepare data to be sent to Mailchimp
+
+	const data = {
+		//Create our members key value pair
+			members: [
+		//array of objects we will subscribe only 1 person right now
+			  {
+		email_address: email //got from post request	//find key name from object properties			
+		status: "subscribed",
+		merge_fields: {	   //mailchimp -> Audience -> Setting -> Audience fields and MERGE tag
+					//Select First name, lastname and birthday.Why? most contact comes in this form
+					//Set the word in field 	//keep same
+
+		FNAME: firstName,
+		LNAME: lastName,
+
+	}
+		//Pass JS data object and convert to JSON format	
+	const jsonData = JSON.stringify(data)
+	
+	//Make a request
+		//earlier we used https.get(url, function() 	//but this is used when we want data from other resource
+		//here we use http.request(url, options][, callback())	// options -> can use "method" option
+									//..tells what type of request we want to make		
+	//Create the request
+		//why specify list id? multiple list in mailchimp, have to specify which list we want to subscribe members into
+	
+	 // Complete our url
+                    const url = https://usX.api.mailchimp.com/3.0/lists/4bcf3cbb34'	//x = no.. in api key after keyword "us"
+	    const url = https://us4.api.mailchimp.com/3.0/lists/4bcf3cbb34'
+		 	
+				//Why x? mailchimp has  several server. when we get assigned we assign randomly us1 - us20
+				
+				//Where to get url from? mailchimp endpoint
+					Where is mailchimp endpoint //Mailchimp -> Get started -> Code examples
+										MC API Endpoint		    Optional paths to tag on
+									         __________________________________  ____
+				//Mailchimp -> Get started -> Code examples -> url 'https://usX.api.mailchimp.com/3.0/lists'
+				//rRemember Where to get unique id?
+						Audience -> manage Audience ->Settings  -> Unique ID (list_id) 4bcf3cbb34
+						
+				Where to get API Key?
+				Check mailchimp API -> Get API Key to authenticate
+				Account -> Extras -> API key -> Create an API key -> Select and copy
+				No. at end of api key after keyword "us"  // for ex 4
+						
+
+      	//Create some options
+	   const options= {
+				//we use method option. earlier used get option.why method? to post data to server
+	   method: "POST",
+	   auth: "angela1:fd8d2a94f77b14c7c....-us4"		//use any key from username, separate username from password //password  will be api key
+							//api key and url region should match
+			
+	//Provide Authentication
+	//what we have? API Key. 
+	//Mailchimp -> Get started -> AUthentication methods -> HTTP Basic Authentication -> Enter any string as username, api key as password
+	//check options for http request function -> auth	//string //allows basic authentication
+}
+	//Make HTTP Request, get back response
+
+	const request = https.request(url, options, function(response){		//pass url, pass option, have a callback to give us response from mailchimp server 
+		response	.on("data", function(data){
+			console.log(JSON.parse(data));	//datra sent back from mailchimp serveris parsed by JSON.parse
+
+	//Where to add data to send to server? in documentation for request method , save  request in const variable (for ex const req)
+				//use req to send things to server for ex   
+					//req.write
+	request.write(jsonData);		//pass this json datato mailchimp server
+	request.end();			//Done with request
+											
+})
+							
+}
+)
+
+}
+]
+
+	 					//Write all your key value pairs in data object with recognizable key	
+						//Create your data to be posted as JSON
+
+}	
+
+		console.log(firstName, lastName, email);
+})
+2) Add Post request for failiure route
+
+app.post("failiure", function(req,res){
+  res.redirect("/")
+})
+
+
+app.listen(3000, function(){
+   console.log("Server is up and running on port 3000");
+});
+-------------------------------------------------------------------
+Test this route
+
+end up on failiure route -> click try again -> again back to sign up page
+
+Post request triggered
+to failiure route ----> Caught by server---->redirect to home route ----> home route triggers app.get  ------> sends signup.html page ---> render on screen
+				     / res.redirect("/")

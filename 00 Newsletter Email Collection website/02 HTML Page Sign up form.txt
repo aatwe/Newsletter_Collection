@@ -1,0 +1,49 @@
+1) Quick html -> Bootstrap
+A) getbootstrap.com -> example -> Sign in Form -> View page source -> paste in signup.html
+
+
+Page not looking fancy. Why? 
+		<link href="../../../dist/css/bootstrap.min.css" rel="stylesheet">	//Bootstrap included as local file, we dont have
+	//instead type bootstrap cdn line
+
+	<link rel="stylesheet" href".."....>
+//Page looking better
+
+B) //Also added a custom style sheet
+<link href="signin.css" rel="stylesheet">
+//go to signin.css -> copy ->paste in your project file : styles.css
+change link ref
+	<link href="styles.css" rel="stylesheet">
+
+C) Change <title> to News letter Signup
+
+
+D) <img class="mb-4" src="images/lablogo.png">
+
+E) <input type="text" class="form-control top" placeholder="First Name" required autofocus>	//First one automatically focus on loading website
+
+   <input type="text" class="form-control middle" placeholder="Last Name" required >
+
+   <input type="text" class="form-control bottom" placeholder="Email" required >
+   
+   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Me Up </button>
+  <p class="mt-5 mb-3 text-muted">&copy; atwe inc</p>
+
+F) //fix boxes, applycorner radius to only top and bottom boxes
+	styles.css
+	.top{
+		margin-bottom: -1px;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+}
+	.middle{
+		margin-bottom: -1px;
+		border-radius: 0;
+	}
+	.bottom{
+		margin-bottom: -1px;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+}
+
+__________________________________________________________________________________________________________

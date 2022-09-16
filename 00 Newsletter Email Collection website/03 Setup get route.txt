@@ -1,0 +1,70 @@
+Is this a web app? no just a static page
+
+G)  Set up get route to sign up page
+	test is on browser at local host:3000
+
+
+G1.1) Set up get route to sign up page
+const express = require("express");
+const body-parser = require("body-parser");
+const request = require("request");
+
+const app = express();
+
+app.get("/", function(req, res){		//use home route//newsletter sign up on home page   // add callback function with req and res
+   res.sendFile(__dirname + "/signup.html")	//specify response to send file at directoryname location 
+});
+
+app.listen(3000, function(){
+   console.log("Server is up and running on port 3000");
+});
+
+G1.2) Test
+	hyperterminal
+	
+	nodemon app.js
+	Server is running on port 3000
+	//check localhost:3000
+	//Image and CSS not visible on server, why? bootstrap style sheet we get from remote location
+					         Custom stylesheet -> local
+		//Server has to serve static files
+		
+
+ G1.2.1	How to serve static files via server?
+		app.use(express.static("public"))
+
+	//Put all your static files in 1 folder : public 
+	create folder
+		public
+		  ->css
+		     -> styles.css
+		  ->images
+		    -> lablogo.png
+-------------------------------------------------------------
+const express = require("express");
+const body-parser = require("body-parser");
+const request = require("request");
+
+const app = express();
+
+//add server static files method
+	app.use(express.static("public"));
+
+app.get("/", function(req, res){		//use home route//newsletter sign up on home page   // add callback function with req and res
+   res.sendFile(__dirname + "/signup.html")	//specify response to send file at directoryname location 
+});
+
+app.listen(3000, function(){
+   console.log("Server is up and running on port 3000");
+});
+
+
+//Also refer to static files using relative url	//relative to public folder
+for ex
+		B) <link href="css/styles.css" rel="stylesheet">
+		   
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SAVE -> REFRESH
+All static files will also render   just coz	*app.use(express.static("public"));*
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+WEBSITE IS SERVED!
